@@ -1,16 +1,20 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import MiApi from './components/MiApi';
+import Buscador from './components/Buscador';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <>
       <div>
-      <button className="btn btn-primary">Mi Botón</button>
+        <Buscador setSearchTerm={setSearchTerm} />
+        <MiApi searchTerm={searchTerm} />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
