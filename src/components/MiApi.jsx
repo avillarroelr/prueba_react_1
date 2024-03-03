@@ -11,7 +11,7 @@ const MiApi = ({ searchTerm = '' }) => {
             try {
                 const response = await fetch('https://huachitos.cl/api/animales');
                 const data = await response.json();
-                // Ordenar lo obtenido en la Api 
+                // Ordenar lo obtenido en api con sort
                 const sortedData = data.data.sort((a, b) => {
                     const nameA = a.nombre.toUpperCase();
                     const nameB = b.nombre.toUpperCase(); 
