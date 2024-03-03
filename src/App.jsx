@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <div>
+        {/* Landing Page */}
         <Buscador setSearchTerm={setSearchTerm} />
         <MiApi searchTerm={searchTerm} />
       </div>

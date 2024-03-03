@@ -4,7 +4,7 @@ body {
 
 }
 .headerBuscador{
-  background-color: white;
+  background-color: orange;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -12,10 +12,14 @@ body {
   align-items: center;
   margin: 0 auto;
   border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: white;
 
 }
 input {
-  max-width: 1000px;
+  max-width: 900px;
+  margin-bottom: 20px;
 }
 .tablaMascotas {
   display: flex;
@@ -24,6 +28,9 @@ input {
   max-width: 1000px;
   margin: 0 auto;
   border-radius: 10px;
+}
+table {
+  background-color: orange;
 }
 img{
   border-radius: 20%;

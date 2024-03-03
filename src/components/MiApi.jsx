@@ -2,23 +2,36 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MiApi = ({ searchTerm = '' }) => {
+    // Estados para almacenar animales y lista filtrada
     const [animals, setAnimals] = useState([]);
     const [filteredAnimals, setFilteredAnimals] = useState([]);
-  
+    // Consumo de API Huachitos
     useEffect(() => {
-      const fetchAnimals = async () => {
-        try {
-          const response = await fetch('https://huachitos.cl/api/animales');
-          const data = await response.json();
-          setAnimals(data.data);
-        } catch (error) {
-          console.error("Error fetching data: ", error);
-        }
-      };
-  
-      fetchAnimals();
+        const fetchAnimals = async () => {
+            try {
+                const response = await fetch('https://huachitos.cl/api/animales');
+                const data = await response.json();
+                // Ordenar lo obtenido en la Api 
+                const sortedData = data.data.sort((a, b) => {
+                    const nameA = a.nombre.toUpperCase();
+                    const nameB = b.nombre.toUpperCase(); 
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                setAnimals(sortedData);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        };
+        fetchAnimals();
     }, []);
-  
+
+    // Filtrado de Animales
     useEffect(() => {
         const results = animals.filter(animal =>
             animal.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -30,10 +43,11 @@ const MiApi = ({ searchTerm = '' }) => {
           );
       setFilteredAnimals(results);
     }, [searchTerm, animals]);
-  
+
+    // Renderizado
     return (
       <div className='tablaMascotas'>
-        <table className='table table-hover table-responsive thead-dark'>
+        <table className='table table-hover'>
           <thead>
             <tr>
               <th>Nombre</th>
@@ -49,6 +63,7 @@ const MiApi = ({ searchTerm = '' }) => {
             </tr>
           </thead>
           <tbody>
+            {/* Iteracion sobre filterAnimals */}
             {filteredAnimals.map((animal) => (
               <tr key={animal.id}>
                 <td>{animal.nombre}</td>
